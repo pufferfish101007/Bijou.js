@@ -2657,33 +2657,103 @@ export let formatNumber = (n = req("number", "number")) =>
 	n.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 /**
  * Easing functions
- * @Object
+ * @namespace
  * @memberOf math
- * @example
- * console.log(_$.ease.easeInOutQuad(.3)); // 0.18 - the eased point of about 1/3 along the animation.
- * @returns {Function} The easing function.
  */
 export let ease = {
-	// no easing, no acceleration
+	/**
+         * No easing, no acceleration.
+         * @function
+         * @param {Number} t The percentage (between 0 and 1) that the animation is through.
+         * @returns {Number} Eased percentage using the linear easing function.
+         * @example
+         * console.log($_.ease.linear(0.3)) // 0.3
+         */
 	linear: (t = req("number", "percentage")) => t,
+        /**
+         * Easing in sine.
+         * @function
+         * @param {Number} t The percentage (between 0 and 1) that the animation is through.
+         * @returns {Number} Eased percentage using the easeInSine easing function.
+         * @example
+         * console.log($_.ease.easeInSine(0.3)) // 0.1089934758116321
+         */
 	easeInSine: (t = req("number", "percentage")) =>
 		1 - Math.cos((t * Math.PI) / 2),
+        /**
+         * Easing out sine.
+         * @function
+         * @param {Number} t The percentage (between 0 and 1) that the animation is through.
+         * @returns {Number} Eased percentage using the easeOutSine easing function.
+         * @example
+         * console.log($_.ease.easeOutSine(0.3)) // 0.45399049973954675
+         */
 	easeOutSine: (t = req("number", "percentage")) =>
 		Math.sin((t * Math.PI) / 2),
+        /**
+         * Easing in & out sine.
+         * @function
+         * @param {Number} t The percentage (between 0 and 1) that the animation is through.
+         * @returns {Number} Eased percentage using the easeInOutSine easing function.
+         * @example
+         * console.log($_.ease.easeInOutSine(0.3)) // 0.20610737385376343
+         */
 	easeInOutSine: (t = req("number", "percentage")) =>
 		-(Math.cos(Math.PI * t) - 1) / 2,
-	// accelerating from zero velocity
+	/**
+         * Quadratic acceleration from zero velocity.
+         * @function
+         * @param {Number} t The percentage (between 0 and 1) that the animation is through.
+         * @returns {Number} Eased percentage using the easeInQuad easing function.
+         * @example
+         * console.log($_.ease.easeInQuad(0.3)) // 0.09
+         */ 
 	easeInQuad: (t = req("number", "percentage")) => t * t,
-	// decelerating to zero velocity
+	/**
+         * Quadratic deceleration to zero velocity.
+         * @function
+         * @param {Number} t The percentage (between 0 and 1) that the animation is through.
+         * @returns {Number} Eased percentage using the easeOutQuad easing function.
+         * @example
+         * console.log($_.ease.easeOutQuad(0.3)) // 0.51
+         */ 
 	easeOutQuad: (t = req("number", "percentage")) => t * (2 - t),
-	// acceleration until halfway, then deceleration
+	/**
+         * Quadratic acceleration until halfway, then deceleration..
+         * @function
+         * @param {Number} t The percentage (between 0 and 1) that the animation is through.
+         * @returns {Number} Eased percentage using the easeInOutQuad easing function.
+         * @example
+         * console.log($_.ease.easeInOutQuad(0.3)) // 0.18
+         */ 
 	easeInOutQuad: (t = req("number", "percentage")) =>
 		t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
-	// accelerating from zero velocity
+	/**
+         * Cubic acceleration from zero velocity.
+         * @function
+         * @param {Number} t The percentage (between 0 and 1) that the animation is through.
+         * @returns {Number} Eased percentage using the easeInCubic easing function.
+         * @example
+         * console.log($_.ease.easeInCubic(0.3)) // 0.027
+         */ 
 	easeInCubic: (t = req("number", "percentage")) => t * t * t,
-	// decelerating to zero velocity
+	/**
+         * Cubic deceleration to zero velocity.
+         * @function
+         * @param {Number} t The percentage (between 0 and 1) that the animation is through.
+         * @returns {Number} Eased percentage using the easeOutCubic easing function.
+         * @example
+         * console.log($_.ease.easeOutCubic(0.3)) // 0.657
+         */ 
 	easeOutCubic: (t = req("number", "percentage")) => --t * t * t + 1,
-	// acceleration until halfway, then deceleration
+	/**
+         * Cubic acceleration until halfway, then deceleration..
+         * @function
+         * @param {Number} t The percentage (between 0 and 1) that the animation is through.
+         * @returns {Number} Eased percentage using the easeInOutCubic easing function.
+         * @example
+         * console.log($_.ease.easeInOutCubic(0.3)) // 0.108
+         */ 
 	easeInOutCubic: (t = req("number", "percentage")) =>
 		t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
 	// accelerating from zero velocity
