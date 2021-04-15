@@ -13,7 +13,8 @@
 	},
 	"scripts": {
 		"doc": "jsdoc -c jsdoc.json",
-		"build": "npm install"
+		"build": "npm install",
+                "jsdoc": "node jsdoc.js"
 	},
 	"keywords": [
 		"js",
