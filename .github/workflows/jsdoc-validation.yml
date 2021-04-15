@@ -1,0 +1,47 @@
+name: Validate jsdoc
+on: 
+  push:
+    paths:
+      - js/array.js
+      - js/color.js
+      - js/date.js
+      - js/element.js
+      - js/event.js
+      - js/function.js
+      - js/math.js
+      - js/object.js
+      - js/string.js
+      - js/utility.js
+  pull_request:
+    paths:
+      - js/array.js
+      - js/color.js
+      - js/date.js
+      - js/element.js
+      - js/event.js
+      - js/function.js
+      - js/math.js
+      - js/object.js
+      - js/string.js
+      - js/utility.js
+  workflow_dispatch:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Check jsdoc
+        run: npm run jsdoc:check
+      - name: Correct some jsdoc
+        if: failure()
+        run: npm run jsdoc:fix
+      - name: Commit changed files
+        if: failure()
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Fix some jsdoc"
