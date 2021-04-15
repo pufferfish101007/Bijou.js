@@ -35,11 +35,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - name: Check jsdoc
-        run: npm run jsdoc:check
-      - name: Correct some jsdoc
-        if: failure()
-        run: npm run jsdoc:fix
+      - name: Check & try to correct jsdoc
+        run: npm run jsdoc
       - name: Commit changed files
         if: failure()
         uses: stefanzweifel/git-auto-commit-action@v4
